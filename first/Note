@@ -1,0 +1,7 @@
+使用gcc编译client和server
+启动server
+启动client
+在服务端就会输出客户端的连接信息
+/*
+*比较简单，目的是为了熟悉以下linux的的socket编程下一个版本会复杂一点
+*/

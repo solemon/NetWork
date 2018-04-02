@@ -17,18 +17,17 @@
 #define SERVER_PORT 8888
 #define SERVER_IP "127.0.0.1"
 #define QUEUE 10
-int create_socket(){
+
+int start_up(){
 	int sock_fd;
+	//create socket
 	sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 	if( sock_fd == -1 ){
 		perror("socket create failed\n");
 		exit(1);
 	}
-	return sock_fd;
-}
-void bind_port(int sock_fd){
+	//bind socket
 	struct sockaddr_in server;
-
 	server.sin_family = AF_INET;
 	server.sin_port = htons(SERVER_PORT);
 	server.sin_addr.s_addr = inet_addr(SERVER_IP);
@@ -37,21 +36,13 @@ void bind_port(int sock_fd){
 		perror("bind error");
 		exit(1);
 	}
-	return;
-}
-void listen_port(int sock_fd){
+	//listen start
 	if( listen(sock_fd, QUEUE) != 0 ){
 		perror("listen error");
 		exit(1);
 	}
-}
-
-int start_up(){
-	int sock_fd;
-	sock_fd = create_socket();
-	bind_port(sock_fd);
-	listen_port(sock_fd);
 	printf("startup successful!\n");
+
 	return sock_fd;
 }
 
